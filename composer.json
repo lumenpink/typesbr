@@ -1,0 +1,26 @@
+{
+    "name": "lumenpink/typesbr",
+    "description": "Common types for Brazilian Documents and Numbers (Only CPF for now)",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lumenpink\\Typesbr\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lumen Pink",
+            "email": "hi@lumen.pink"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "pestphp/pest": "^2.31.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
