@@ -2,7 +2,7 @@
 
 namespace Lumenpink\Typesbr;
 
-final class Cpf
+final class Cpf implements TypesbrInterface
 {
     private string $cpf;
     public function __construct(string $cpf)
@@ -12,16 +12,9 @@ final class Cpf
         }
         $this->cpf = $cpf;
         $this->normalize();
-        if (!self::validate('cpf', $this->cpf)) {
+        if (!self::validate($this->cpf)) {
             throw new \InvalidArgumentException('Invalid CPF');
         }
-    }
-    /*
-    Returns the CPF without mask
-    */
-    public function getCpf(): string
-    {
-        return $this->cpf;
     }
     public function normalize()
     {
@@ -37,11 +30,14 @@ final class Cpf
         $result .= substr($this->cpf, 9, 2) . '';
         return $result;
     }
+    /*
+    Returns the CPF without mask
+    */
     public function __toString(): string
     {
         return $this->cpf;
     }
-    public static function validate($attribute, $cpf)
+    public static function validate($cpf)
     {
         if (empty($cpf)) {
             return false;
