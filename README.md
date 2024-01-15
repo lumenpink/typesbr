@@ -17,18 +17,18 @@ composer require lumenpink/typesbr
 ```php
 use Lumenpink/Typesbr/Cpf
 
-# Statically call validate
-Cpf::validate('000.000.001-91');
-
 # Create new CPF
 $cpf = new Cpf('000.000.001-91')  // it accepts with or without mask or leading zeroes
                                   // it throwns an InvalidArgumentException if invalid
 
-# Return the nomalized value
-$cpf->getValue(); // returns 00000000191
+# Return only digits
+$cpf->digits(); // returns 00000000191
 
-# Or the masked version
-$Cpf->format(); // returns 000.000.001-91
+# Or the formatted (masked) version
+$Cpf->formated(); // returns 000.000.001-91
+
+# Return the type of document
+$Cpf->type(); // returns 'cpf'
 
 # Use it as primitive type on a function
 function foo (Cpf $cpf) {
