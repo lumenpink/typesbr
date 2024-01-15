@@ -9,7 +9,7 @@ Common types for Brazilian Documents and Numbers
 Install it usingo composer
 
 ```bash
-composer require Lumenpink/Typesbr
+composer require lumenpink/typesbr
 ```
 
 ## Usage
