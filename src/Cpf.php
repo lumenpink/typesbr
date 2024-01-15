@@ -39,7 +39,7 @@ final class Cpf
     }
     public function __toString(): string
     {
-        return \sprintf($this->cpf);
+        return $this->cpf;
     }
     public static function validate($attribute, $cpf)
     {
