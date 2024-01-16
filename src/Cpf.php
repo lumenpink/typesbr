@@ -5,18 +5,21 @@ namespace Lumenpink\Typesbr;
 final class Cpf implements TypesbrInterface
 {
     private string $cpf;
+
     public function __construct(string $cpf)
     {
         $this->cpf = $cpf;
         $this->normalize();
         $this->validate();
     }
+
     private function normalize(): void
     {
         // Clear var to keep only digits and pad leading zeroes
         $this->cpf = preg_replace('/\D/', '', $this->cpf);
         $this->cpf = str_pad($this->cpf, 11, '0', STR_PAD_LEFT);
     }
+
     public function digits(): string
     {
         return $this->cpf;
@@ -24,11 +27,12 @@ final class Cpf implements TypesbrInterface
 
     public function formatted(): string
     {
-        return  substr($this->cpf, 0, 3) . '.' .
-            substr($this->cpf, 3, 3) . '.' .
-            substr($this->cpf, 6, 3) . '-' .
-            substr($this->cpf, 9, 2) . '';
+        return substr($this->cpf, 0, 3).'.'.
+            substr($this->cpf, 3, 3).'.'.
+            substr($this->cpf, 6, 3).'-'.
+            substr($this->cpf, 9, 2).'';
     }
+
     /*
     Returns the type of the document
     */
@@ -36,6 +40,7 @@ final class Cpf implements TypesbrInterface
     {
         return 'cpf';
     }
+
     /*
     Returns the CPF without mask
     */
@@ -43,6 +48,7 @@ final class Cpf implements TypesbrInterface
     {
         return $this->cpf;
     }
+
     public function validate(): void
     {
         if (empty($this->cpf)) {
@@ -54,7 +60,7 @@ final class Cpf implements TypesbrInterface
         }
         // Verifica se nenhuma das sequências invalidas abaixo
         // foi digitada. Caso afirmativo, retorna falso
-        else if (
+        elseif (
             $this->cpf == '00000000000' ||
             $this->cpf == '11111111111' ||
             $this->cpf == '22222222222' ||
