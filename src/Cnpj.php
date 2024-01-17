@@ -8,6 +8,9 @@ final class Cnpj implements TypesbrInterface
 
     public function __construct(string $cnpj)
     {
+        if (empty($cnpj)) {
+            throw new \InvalidArgumentException('CNPJ cannot be empty');
+        }
         $this->cnpj = $cnpj;
         $this->normalize();
         $this->validate();
@@ -53,12 +56,9 @@ final class Cnpj implements TypesbrInterface
 
     public function validate(): void
     {
-        if (empty($this->cnpj)) {
-            throw new \InvalidArgumentException('CNPJ cannot be empty');
-        }
         // verify if there are 11 digits left
         if (strlen($this->cnpj) !== 14) {
-            throw new \InvalidArgumentException('CNPJ cannot must have 11 digits');
+            throw new \InvalidArgumentException('CNPJ must have 14 digits');
         }
         // Verifica se nenhuma das sequências invalidas abaixo
         // foi digitada. Caso afirmativo, retorna falso
@@ -74,7 +74,7 @@ final class Cnpj implements TypesbrInterface
             $this->cnpj == '88888888888' ||
             $this->cnpj == '99999999999'
         ) {
-            throw new \InvalidArgumentException('Invalid CNPJ');
+            throw new \InvalidArgumentException('CNPJ cannot repeat same digit');
             // Calculate the verification digit
         } else {
             for ($t = 12; $t < 14; $t++) {

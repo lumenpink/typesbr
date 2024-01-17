@@ -8,6 +8,9 @@ final class Registrationsc implements TypesbrInterface
 
     public function __construct(string $registrationsc)
     {
+        if (empty($registrationsc)) {
+            throw new \InvalidArgumentException('Registration SC cannot be empty');
+        }
         $this->registrationsc = $registrationsc;
         $this->normalize();
         $this->validate();
@@ -50,12 +53,9 @@ final class Registrationsc implements TypesbrInterface
 
     public function validate(): void
     {
-        if (empty($this->registrationsc)) {
-            throw new \InvalidArgumentException('Registration cannot be empty');
-        }
         // verify if there are 11 digits left
         if (strlen($this->registrationsc) !== 7) {
-            throw new \InvalidArgumentException('Registration cannot must have 7 digits');
+            throw new \InvalidArgumentException('Registration SC must have 7 digits');
         }
         // Verifica se nenhuma das sequências invalidas abaixo
         // foi digitada. Caso afirmativo, retorna falso

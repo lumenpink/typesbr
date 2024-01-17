@@ -8,6 +8,9 @@ final class Cpf implements TypesbrInterface
 
     public function __construct(string $cpf)
     {
+        if (empty($cpf)) {
+            throw new \InvalidArgumentException('CPF cannot be empty');
+        }
         $this->cpf = $cpf;
         $this->normalize();
         $this->validate();
@@ -27,10 +30,10 @@ final class Cpf implements TypesbrInterface
 
     public function formatted(): string
     {
-        return substr($this->cpf, 0, 3).'.'.
-            substr($this->cpf, 3, 3).'.'.
-            substr($this->cpf, 6, 3).'-'.
-            substr($this->cpf, 9, 2).'';
+        return substr($this->cpf, 0, 3) . '.' .
+            substr($this->cpf, 3, 3) . '.' .
+            substr($this->cpf, 6, 3) . '-' .
+            substr($this->cpf, 9, 2) . '';
     }
 
     /*
@@ -51,12 +54,9 @@ final class Cpf implements TypesbrInterface
 
     public function validate(): void
     {
-        if (empty($this->cpf)) {
-            throw new \InvalidArgumentException('CPF cannot be empty');
-        }
         // verify if there are 11 digits left
         if (strlen($this->cpf) !== 11) {
-            throw new \InvalidArgumentException('CPF cannot must have 11 digits');
+            throw new \InvalidArgumentException('CPF must have 11 digits');
         }
         // Verifica se nenhuma das sequências invalidas abaixo
         // foi digitada. Caso afirmativo, retorna falso
@@ -72,7 +72,7 @@ final class Cpf implements TypesbrInterface
             $this->cpf == '88888888888' ||
             $this->cpf == '99999999999'
         ) {
-            throw new \InvalidArgumentException('Invalid CPF');
+            throw new \InvalidArgumentException('CPF cannot repeat same digit');
             // Calculate the verification digit
         } else {
             for ($t = 9; $t < 11; $t++) {
