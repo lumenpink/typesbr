@@ -1,0 +1,25 @@
+name: TypesBR
+run-name: ${{ github.actor }} is testing 🚀
+on: [push]
+jobs:
+  GitHub-Actions:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest, windows-latest, macOS-latest]
+        php-versions: ['7.4','8.2','8.3']
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+        extensions: pcov 
+        ini-values: "post_max_size=256M" 
+    - name: Composer install
+      run: composer install
+    - name: Do the Test
+      run: vendor/bin/pest --coverage
+
