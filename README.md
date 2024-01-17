@@ -1,3 +1,6 @@
+[![TypesBR](https://github.com/lumenpink/typesbr/actions/workflows/github-actions.yml/badge.svg)](https://github.com/lumenpink/typesbr/actions/workflows/github-actions.yml)
+
+
 # Lumenpink/Typesbr
 
 Common types for Brazilian Documents and Numbers
